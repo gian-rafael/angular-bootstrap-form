@@ -12,12 +12,9 @@ export class ModalComponent implements OnChanges {
   @Input() formData?: FormData;
   data: Fields = [];
 
-  constructor() {}
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes.formData.currentValue) {
       this.data = Object.entries(changes.formData.currentValue) as Fields;
-      console.log(this.data);
     }
   }
 }

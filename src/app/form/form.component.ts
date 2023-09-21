@@ -16,6 +16,8 @@ type EmploymentOptions = {
 export class FormComponent {
   @Output() formSubmit: EventEmitter<FormData> = new EventEmitter();
 
+  readonly CURRENT_DATE = new Date().toISOString().split("T")[0];
+
   employmentOptions: EmploymentOptions[] = [
     {
       name: "Unemployed",

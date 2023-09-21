@@ -5,5 +5,6 @@ export interface FormData {
   email: string;
   mobile: string;
   gender: string;
+  birthday: string;
   employment: EmploymentStatus;
 }

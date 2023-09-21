@@ -6,7 +6,7 @@
       <div class="form-group col-12 col-md-6">
         <label>First Name</label>
         <input ngModel required #firstName="ngModel" name="firstName" type="text" class="form-control"
-          placeholder="John" [class.border-danger]="firstName.touched && firstName.errors">
+          placeholder="John" [class.border-danger]="firstName.touched && firstName.errors" />
         <div class="text-danger" *ngIf="firstName.touched && firstName.errors">
           First Name is required.
         </div>
@@ -15,7 +15,7 @@
       <div class="form-group col-12 col-md-6">
         <label>Last Name</label>
         <input ngModel required #lastName="ngModel" name="lastName" type="text" class="form-control" placeholder="Doe"
-          [class.border-danger]="lastName.touched && lastName.errors">
+          [class.border-danger]="lastName.touched && lastName.errors" />
         <div class="text-danger" *ngIf="lastName.touched && lastName.errors">
           Last Name is required.
         </div>
@@ -29,10 +29,14 @@
           </div>
           <input ngModel required #email="ngModel" name="email" type="email" class="form-control"
             [class.border-danger]="email.touched && email.errors" placeholder="john.doe@mail.com"
-            pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+            pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
         </div>
         <div class="text-danger" *ngIf="email.touched && email.errors">
-          {{ email.errors.required ? "Email Address is required" : "Invalid Email Format" }}
+          {{
+          email.errors.required
+          ? "Email Address is required"
+          : "Invalid Email Format"
+          }}
         </div>
       </div>
       <!-- Mobile Number -->
@@ -43,11 +47,23 @@
             <span class="input-group-text">+63</span>
           </div>
           <input ngModel required #mobile="ngModel" name="mobile" type="tel"
-            [class.border-danger]=" mobile.touched && mobile.errors" class="form-control" placeholder="xxx-xxx-xxxx"
-            minlength="10" maxlength="10" pattern="\d+">
+            [class.border-danger]="mobile.touched && mobile.errors" class="form-control" placeholder="xxx-xxx-xxxx"
+            minlength="10" maxlength="10" pattern="\d+" />
         </div>
         <div class="text-danger" *ngIf="mobile.touched && mobile.errors">
-          {{ mobile.errors.required ? "Mobile Number is required" : "Invalid Mobile Number Format" }}
+          {{
+          mobile.errors.required
+          ? "Mobile Number is required"
+          : "Invalid Mobile Number Format"
+          }}
+        </div>
+      </div>
+      <!-- Birthday -->
+      <div class="form-group col-12">
+        <label>Birthday</label>
+        <input ngModel type="date" #birthday="ngModel"  [class.border-danger]="birthday.touched && birthday.errors" name="birthday" class="form-control" [max]="CURRENT_DATE" required>
+        <div class="text-danger" *ngIf="birthday.touched && birthday.errors">
+          Birthday is required.
         </div>
       </div>
       <!-- Employment Status -->
@@ -55,7 +71,9 @@
         <label>Employment Status</label>
         <select ngModel #employment="ngModel" name="employment" id="" class="form-control" required>
           <option value="" disabled selected>Select Employment Status</option>
-          <option *ngFor="let option of employmentOptions" [value]="option.value">{{option.name}}</option>
+          <option *ngFor="let option of employmentOptions" [value]="option.value">
+            {{ option.name }}
+          </option>
         </select>
       </div>
       <!-- Gender -->
@@ -63,21 +81,23 @@
         <label>Gender</label>
         <div class="w-100 d-flex justify-content-start align-items-center col-12 mb-3">
           <div class="form-check">
-            <input ngModel class="form-check-input" type="radio" name="gender" value="male" id="male-gender">
+            <input ngModel class="form-check-input" type="radio" name="gender" value="male" id="male-gender" />
             <label for="male-gender" class="form-check-label">Male</label>
           </div>
           <div class="form-check mx-3">
-            <input ngModel class="form-check-input" type="radio" name="gender" value="female" id="female-gender">
+            <input ngModel class="form-check-input" type="radio" name="gender" value="female" id="female-gender" />
             <label for="female-gender" class="form-check-label">Female</label>
           </div>
           <div class="form-check">
-            <input ngModel class="form-check-input" type="radio" name="gender" value="others" id="others-gender">
+            <input ngModel class="form-check-input" type="radio" name="gender" value="others" id="others-gender" />
             <label for="others-gender" class="form-check-label">Others</label>
           </div>
         </div>
       </div>
       <button class="col-12 btn btn-primary" type="submit" [disabled]="form.invalid" data-toggle="modal"
-        data-target="#formModal">Submit</button>
+        data-target="#formModal">
+        Submit
+      </button>
     </div>
   </form>
 </div>
