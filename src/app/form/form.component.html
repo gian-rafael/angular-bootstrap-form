@@ -69,7 +69,7 @@
       <!-- Employment Status -->
       <div class="form-group col-12 col-md-6">
         <label>Employment Status</label>
-        <select ngModel #employment="ngModel" name="employment" id="" class="form-control" required>
+        <select ngModel #employment="ngModel" name="employment" class="form-control" required>
           <option value="" disabled selected>Select Employment Status</option>
           <option *ngFor="let option of employmentOptions" [value]="option.value">
             {{ option.name }}

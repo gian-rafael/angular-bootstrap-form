@@ -1,7 +1,15 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from "@angular/core";
 import { EmploymentStatus, FormData } from "../form.interface";
 
 import { NgForm } from "@angular/forms";
+import { Observable, Subscription } from "rxjs";
 
 type EmploymentOptions = {
   name: string;
@@ -13,10 +21,15 @@ type EmploymentOptions = {
   templateUrl: "./form.component.html",
   styleUrls: ["./form.component.css"],
 })
-export class FormComponent {
+export class FormComponent implements OnInit, OnDestroy {
+  @Input() formSubmitted: Observable<boolean>;
   @Output() formSubmit: EventEmitter<FormData> = new EventEmitter();
 
+  currentForm?: NgForm;
+
   readonly CURRENT_DATE = new Date().toISOString().split("T")[0];
+
+  formSubmitted$: Subscription;
 
   employmentOptions: EmploymentOptions[] = [
     {
@@ -33,9 +46,28 @@ export class FormComponent {
     },
   ];
 
-  constructor() {}
+  ngOnInit() {
+    if (this.formSubmitted) {
+      this.formSubmitted$ = this.formSubmitted.subscribe(
+        (clearForm: boolean) => {
+          if (this.currentForm && clearForm) {
+            this.currentForm.resetForm();
+            this.currentForm.setValue({
+              ...this.currentForm.value,
+              employment: "",
+            });
+          }
+        }
+      );
+    }
+  }
 
-  onSubmit(formData: FormData) {
-    this.formSubmit.emit({...formData, mobile: `+63${formData.mobile}`});
+  ngOnDestroy() {
+    this.formSubmitted$.unsubscribe();
+  }
+
+  onSubmit(formData: FormData, form?: NgForm) {
+    this.currentForm = form;
+    this.formSubmit.emit({ ...formData, mobile: `+63${formData.mobile}` });
   }
 }
