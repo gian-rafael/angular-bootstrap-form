@@ -73,12 +73,16 @@
       <!-- Employment Status -->
       <div class="form-group col-12 col-md-6">
         <label>Employment Status<span class="text-danger">*</span></label>
-        <select ngModel #employment="ngModel" name="employment" class="form-control" required>
+        <select ngModel #employment="ngModel" name="employment" class="form-control" required
+          [class.border-danger]="employment.touched && employment.errors">
           <option value="" disabled selected>Select Employment Status</option>
           <option *ngFor="let option of employmentOptions" [value]="option.value">
             {{ option.name }}
           </option>
         </select>
+        <div class="text-danger" *ngIf="employment.touched && employment.errors">
+          Employment Status is required.
+        </div>
       </div>
       <!-- Gender -->
       <div class="form-group col-12 col-md-6">
