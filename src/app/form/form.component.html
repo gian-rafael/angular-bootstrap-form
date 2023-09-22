@@ -60,11 +60,14 @@
       </div>
       <!-- Birthday -->
       <div class="form-group col-12">
-        <label>Birthday</label>
-        <input ngModel type="date" #birthday="ngModel" [class.border-danger]="birthday.touched && birthday.errors"
-          name="birthday" class="form-control" [max]="CURRENT_DATE" required>
-        <div class="text-danger" *ngIf="birthday.touched && birthday.errors">
-          Birthday is required.
+        <label>Date Of Birth</label>
+        <input ngModel type="date" #birthday="ngModel"
+          [class.border-danger]="birthday.touched && (birthday.errors || invalidDate)" name="birthday"
+          class="form-control" (ngModelChange)="handleDateChange($event)" [max]="CURRENT_DATE" required>
+        <div class="text-danger" *ngIf="birthday.touched && (birthday.errors || invalidDate)">
+          {{
+          invalidDate ? "Invalid Date of Birth" : "Date of Birth is required"
+          }}
         </div>
       </div>
       <!-- Employment Status -->
@@ -99,8 +102,8 @@
         <button class="col-12 col-md btn btn-secondary mr-md-1" type="reset">
           Reset
         </button>
-        <button class="col-12 col-md btn btn-primary mb-2 mb-md-0 ml-md-1" type="submit" [disabled]="form.invalid" data-toggle="modal"
-          data-target="#formModal">
+        <button class="col-12 col-md btn btn-primary mb-2 mb-md-0 ml-md-1" type="submit"
+          [disabled]="form.invalid || invalidDate" data-toggle="modal" data-target="#formModal">
           Submit
         </button>
       </div>

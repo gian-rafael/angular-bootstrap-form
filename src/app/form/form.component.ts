@@ -31,6 +31,8 @@ export class FormComponent implements OnInit, OnDestroy {
 
   formSubmitted$: Subscription;
 
+  invalidDate: boolean = false;
+
   employmentOptions: EmploymentOptions[] = [
     {
       name: "Unemployed",
@@ -69,5 +71,10 @@ export class FormComponent implements OnInit, OnDestroy {
   onSubmit(formData: FormData, form?: NgForm) {
     this.currentForm = form;
     this.formSubmit.emit({ ...formData, mobile: `+63${formData.mobile}` });
+  }
+
+  handleDateChange(dateValue: string) {
+    this.invalidDate =
+      new Date(dateValue).getFullYear() >= new Date().getFullYear();
   }
 }
