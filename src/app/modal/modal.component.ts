@@ -10,6 +10,16 @@ import { FormData } from "../form.interface";
 
 type Fields = Array<[keyof FormData, any]>;
 
+const formDataFieldMapping = {
+  firstName: "First Name",
+  lastName: "Last Name",
+  email: "Email Address",
+  mobile: "Mobile Number",
+  gender: "Gender",
+  birthday: "Birthday",
+  employment: "Employment Status",
+};
+
 @Component({
   selector: "app-modal",
   templateUrl: "./modal.component.html",
@@ -18,6 +28,16 @@ type Fields = Array<[keyof FormData, any]>;
 export class ModalComponent implements OnChanges {
   @Input() formData?: FormData;
   @Output() proceed: EventEmitter<void> = new EventEmitter();
+
+  readonly formDataFieldMapping = {
+    firstName: "First Name",
+    lastName: "Last Name",
+    email: "Email Address",
+    mobile: "Mobile Number",
+    gender: "Gender",
+    birthday: "Birthday",
+    employment: "Employment Status",
+  };
 
   data: Fields = [];
 
