@@ -1,34 +1,10 @@
 <div class="modal fade" id="formModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header justify-content-center">
-        <h2 class="h2">Verify Details</h2>
+      <div class="modal-header">
+        <h2 class="h2 modal-title">Verify Details</h2>
       </div>
       <div class="modal-body row">
-        <!-- <div class="row col-5">
-          <div class="col-12 text-nowrap">
-            First Name :
-          </div>
-          <div class="col-12 text-nowrap">
-            Last Name :
-          </div>
-          <div class="col-12 text-nowrap">
-            Email Address :
-          </div>
-          <div class="col-12 text-nowrap">
-            Mobile Number :
-          </div>
-          <div class="col-12 text-nowrap">
-            Birthday
-          </div>
-          <div class="col-12 text-nowrap">
-            Employment Status :
-          </div>
-          <div class="col-12 text-nowrap">
-            Gender :
-          </div>
-        </div> -->
-        <!-- <div class="row col-7"> -->
         <div class="col-12 row justify-content-center" *ngFor="let field of data">
           <div class="col-5 text-nowrap">
             {{ formDataFieldMapping[field[0]] }} :
@@ -37,7 +13,6 @@
             {{ field[1] | uppercase }}
           </div>
         </div>
-        <!-- </div> -->
       </div>
       <div class="modal-footer">
         <button data-dismiss="modal" class="btn btn-light">Close</button>
